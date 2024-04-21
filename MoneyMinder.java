@@ -27,7 +27,7 @@ public class MoneyMinder {
     
     public static void addIncome(List<Map<String, Object>> incomes, Scanner scanner) {
         while (true) {
-            System.out.print("Enter income amount (enter 0 to stop): ");
+            System.out.print("Enter/View income amount (enter 0 to view and exit): ");
             double amount = scanner.nextDouble();
             if (amount == 0) {
                 break;
