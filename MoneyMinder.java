@@ -30,22 +30,37 @@ public class MoneyMinder {
     public static void openMenu(){
         Scanner sc = new Scanner(System.in);
         HashMap<String, String> userAccounts = new HashMap<>();
-        String option = "3";
+
+        //Automatically input admin account
+        userAccounts.put("admin", "admin");
+
+        String option = "4";
         do{
-            System.out.println("Pick an option: \n1. Create a User");
+            System.out.println("\n------------------------ \n     MONEY MINDER \n------------------------ \n1. Create Account \n2. Login \n3. Exit \nPlease choose an option: ");
             option = sc.nextLine();
             if(option.equals("1")){
                 //CREATE USER
                 ArrayList<String> tempUser = createUser();
                 userAccounts.put(tempUser.get(0), tempUser.get(1));
             }
-            // else if(option.equals("2")){
-            //     //login will go here
-            // }
+            else if(option.equals("2")){
+                boolean loggedIn = login(userAccounts);
+                if(loggedIn){
+                    System.out.println("\nSuccessfully logged in!");
+                }
+                else{
+                    System.out.println("\nLogin does not exist. Returning to opening menu...");
+                    option = "4";
+                }
+            }
+            else if(option.equals("3")){
+                System.out.println("Goodbye!");
+                System.exit(0);
+            }
             else{
                 System.out.println("Not an option. Please choose again.");
             }
-    }while(!option.equals("1") /*&& !option.equals("2")*/);
+    }while(!option.equals("1") && !option.equals("2") && !option.equals("3"));
 
     }
 
@@ -63,6 +78,35 @@ public class MoneyMinder {
         user.add(password);
 
         return user;
+    }
+
+    public static boolean login(HashMap<String, String> users){
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> tempUser = new ArrayList<>();
+        
+        System.out.print("Enter username: ");
+        String username = sc.nextLine();
+
+        System.out.print("Enter password: ");
+        String password = sc.nextLine();
+
+        tempUser.add(username);
+        tempUser.add(password);
+        
+        //username exists in system
+        if(users.containsKey(username)){
+            //password match
+            if(users.get(username).equals(password)){
+                return true;
+            }
+            else{   //password doesn't match
+                return false;
+            }
+        }
+        else{   //username doesnt exist in system
+            return false;
+        }
+
     }
     
     public static void addIncome(List<Map<String, Object>> incomes, Scanner scanner) {
