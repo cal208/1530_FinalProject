@@ -1,13 +1,13 @@
 import java.util.*;
 
-public class MoneyMinder { 
+public class MoneyMinder {  
+    // Predefined list of expense categories
+    String[] categories = {"Food", "Transportation", "Housing", "Entertainment", "Utilities", "Healthcare"};
     public static void main(String[] args){
         String menuString = "------------------------ \n     MONEY MINDER \n------------------------ \n1. Add Expense \n2. Add income \n3. Exit \nPlease choose an option: ";
         Scanner scanner = new Scanner(System.in); 
         int choice; 
         
-        // Predefined list of expense categories
-        String[] categories = {"Food", "Transportation", "Housing", "Entertainment", "Utilities", "Healthcare"};
         User user = new User();
         while(true) {
             System.out.print(menuString);
