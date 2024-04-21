@@ -1,8 +1,6 @@
 import java.util.*;
 
 public class MoneyMinder {  
-    // Predefined list of expense categories
-    String[] categories = {"Food", "Transportation", "Housing", "Entertainment", "Utilities", "Healthcare"};
     public static void main(String[] args){
         String menuString = "------------------------ \n     MONEY MINDER \n------------------------ \n1. Add Expense \n2. Add income \n3. Exit \nPlease choose an option: ";
         Scanner scanner = new Scanner(System.in); 
@@ -46,7 +44,10 @@ public class MoneyMinder {
         }
     } 
 
-    public static void addExpense(Scanner scanner) {
+    public static void addExpense(Scanner scanner) { 
+        // Predefined list of expense categories
+        String[] categories = {"Food", "Transportation", "Housing", "Entertainment", "Utilities", "Healthcare"};
+        
         // List to store expenses as dictionaries
         List<Map<String, String>> expensesList = new ArrayList<>();
 
