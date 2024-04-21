@@ -23,33 +23,29 @@ class User {
     }
 }
 
-public class classassignment {
+public class AddIncome {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         User user = new User();
 
-        // Loop to input incomes until user enters 0 to stop
         while (true) {
             System.out.print("Enter income amount (enter 0 to stop): ");
             double amount = scanner.nextDouble();
             if (amount == 0) {
                 break;
             }
-            scanner.nextLine(); // Consume newline character
+            scanner.nextLine(); 
             System.out.print("Enter income source: ");
             String source = scanner.nextLine();
 
-            // Adding income
             user.addIncome(amount, source);
         }
 
-        // Displaying user's incomes
         System.out.println("User's incomes:");
         for (Map<String, Object> income : user.getIncomes()) {
             System.out.println("Amount: $" + income.get("amount") + ", Source: " + income.get("source"));
         }
 
-        // Close the scanner
         scanner.close();
     }
 }
