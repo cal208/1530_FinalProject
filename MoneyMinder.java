@@ -15,7 +15,7 @@ public class MoneyMinder {
                     addExpense(scanner);
                     break;
                 case 2:
-                    addIncome(user, scanner);
+                    addIncome(incomes, scanner);
                     break;
                 case 3:
                     System.exit(0);
