@@ -5,8 +5,8 @@ public class MoneyMinder {
         String menuString = "------------------------ \n     MONEY MINDER \n------------------------ \n1. Add Expense \n2. Add income \n3. Exit \nPlease choose an option: ";
         Scanner scanner = new Scanner(System.in); 
         int choice; 
+        List<Map<String, Object>> incomes = new ArrayList<>();
         
-        User user = new User();
         while(true) {
             System.out.print(menuString);
             choice = scanner.nextInt();
@@ -24,7 +24,8 @@ public class MoneyMinder {
             }
         }
     }
-    public static void addIncome(User user, Scanner scanner) {
+    
+    public static void addIncome(List<Map<String, Object>> incomes, Scanner scanner) {
         while (true) {
             System.out.print("Enter income amount (enter 0 to stop): ");
             double amount = scanner.nextDouble();
@@ -35,15 +36,18 @@ public class MoneyMinder {
             System.out.print("Enter income source: ");
             String source = scanner.nextLine();
 
-            user.addIncome(amount, source);
+            Map<String, Object> income = new HashMap<>();
+            income.put("amount", amount);
+            income.put("source", source);
+            incomes.add(income);
         }
 
         System.out.println("User's incomes:");
-        for (Map<String, Object> income : user.getIncomes()) {
+        for (Map<String, Object> income : incomes) {
             System.out.println("Amount: $" + income.get("amount") + ", Source: " + income.get("source"));
         }
-    } 
-
+    }
+    
     public static void addExpense(Scanner scanner) { 
         // Predefined list of expense categories
         String[] categories = {"Food", "Transportation", "Housing", "Entertainment", "Utilities", "Healthcare"};
