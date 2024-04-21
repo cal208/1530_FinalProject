@@ -2,7 +2,8 @@ import java.util.*;
 
 public class MoneyMinder {  
     public static void main(String[] args){
-        String menuString = "------------------------ \n     MONEY MINDER \n------------------------ \n1. Add Expense \n2. Add income \n3. Exit \nPlease choose an option: ";
+        openMenu();
+        String menuString = "\n------------------------ \n     MONEY MINDER \n------------------------ \n1. Add Expense \n2. Add income \n3. Exit \nPlease choose an option: ";
         Scanner scanner = new Scanner(System.in); 
         int choice; 
         List<Map<String, Object>> incomes = new ArrayList<>();
@@ -23,6 +24,45 @@ public class MoneyMinder {
                     System.out.println("NOT A VALID CHOICE");
             }
         }
+    }
+
+        //user must login or create user
+    public static void openMenu(){
+        Scanner sc = new Scanner(System.in);
+        HashMap<String, String> userAccounts = new HashMap<>();
+        String option = "3";
+        do{
+            System.out.println("Pick an option: \n1. Create a User");
+            option = sc.nextLine();
+            if(option.equals("1")){
+                //CREATE USER
+                ArrayList<String> tempUser = createUser();
+                userAccounts.put(tempUser.get(0), tempUser.get(1));
+            }
+            // else if(option.equals("2")){
+            //     //login will go here
+            // }
+            else{
+                System.out.println("Not an option. Please choose again.");
+            }
+    }while(!option.equals("1") /*&& !option.equals("2")*/);
+
+    }
+
+    public static ArrayList<String> createUser(){
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> user = new ArrayList<>();
+        
+        System.out.print("Create a username: ");
+        String username = sc.nextLine();
+
+        System.out.print("Create a password: ");
+        String password = sc.nextLine();
+
+        user.add(username);
+        user.add(password);
+
+        return user;
     }
     
     public static void addIncome(List<Map<String, Object>> incomes, Scanner scanner) {
