@@ -1,5 +1,6 @@
 # 1530 Final Project - Money Minder
 ## List of files in this repository
+productBacklog.md : Product Backlog
 MoneyMinder.java: Java file that implements our system
 ## How to run the system
 1. Download MoneyMinder.java
