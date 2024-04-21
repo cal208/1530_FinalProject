@@ -3,17 +3,27 @@ import java.util.*;
 public class MoneyMinder {  
     public static void main(String[] args){
         openMenu();
-        String menuString = "\n------------------------ \n     MONEY MINDER \n------------------------ \n1. Add Expense \n2. Add income \n3. Exit \nPlease choose an option: ";
+        String menuString = "\n------------------------ \n     MONEY MINDER \n------------------------ \n1. Add or View Expense \n2. Add or View income \n3. Exit \nPlease choose an option: ";
         Scanner scanner = new Scanner(System.in); 
         int choice; 
         List<Map<String, Object>> incomes = new ArrayList<>();
+        List<Map<String, String>> expensesList = new ArrayList<>();
+
+        // Predefined list of expense categories
+        ArrayList<String> categories = new ArrayList<String>();
+        categories.add("Food");
+        categories.add("Transportation");
+        categories.add("Housing");
+        categories.add("Entertainment");
+        categories.add("Utilities");
+        categories.add("Healthcare");
         
         while(true) {
             System.out.print(menuString);
             choice = scanner.nextInt();
             switch(choice) {
                 case 1:
-                    addExpense(scanner);
+                    addExpense(expensesList, categories, scanner);
                     break;
                 case 2:
                     addIncome(incomes, scanner);
@@ -111,7 +121,7 @@ public class MoneyMinder {
     
     public static void addIncome(List<Map<String, Object>> incomes, Scanner scanner) {
         while (true) {
-            System.out.print("Enter/View income amount (enter 0 to view and exit): ");
+            System.out.print("Enter income amount (type '0' to view all added expenses and return to main menu): ");
             double amount = scanner.nextDouble();
             if (amount == 0) {
                 break;
@@ -132,71 +142,77 @@ public class MoneyMinder {
         }
     }
     
-    public static void addExpense(Scanner scanner) 
+    public static void addExpense(List<Map<String, String>> expensesList, ArrayList<String> categories, Scanner scanner) 
     {
+        // Ask the user to input expense details
+        while (true) {
 
-        // Predefined list of expense categories
-    String[] categories = {"Food", "Transportation", "Housing", "Entertainment", "Utilities", "Healthcare"};
-
-    // List to store expenses as dictionaries
-    List<Map<String, String>> expensesList = new ArrayList<>();
-
-
-    // Ask the user to input expense details
-    while (true) {
-
-        // Print the list of categories before starting the loop
-        for (int i = 0; i < categories.length; i++) {
-            System.out.println((i + 1) + ". " + categories[i]);
-        } 
-        System.out.print("Enter the number of the category (type '0' to view all added expenses and return to main menu): ");   
-        int choice = scanner.nextInt();  
-        
-        if (choice == 0) {
-            // Print out all the expenses
-            System.out.println("\nAll Expenses:");
-            for (Map<String, String> expense : expensesList) {
-                System.out.println("Expense Name: " + expense.get("Expense Name"));
-                System.out.println("Category: " + expense.get("Category"));
-                System.out.println("Value: " + expense.get("Value"));
-                System.out.println("Date: " + expense.get("Date"));
-                System.out.println();
+            // Print the list of categories before starting the loop
+            int i;
+            for (i = 0; i < categories.size(); i++) {
+                System.out.println((i + 1) + ". " + categories.get(i));
+            } 
+            System.out.println((i + 1) + ". CUSTOM CATEGORY");
+            System.out.print("Enter the number of the category (type '0' to view all added expenses and return to main menu): ");   
+            int choice = scanner.nextInt();  
+            
+            if (choice == 0) {
+                // Print out all the expenses
+                System.out.println("\nAll Expenses:");
+                for (Map<String, String> expense : expensesList) {
+                    System.out.println("Expense Name: " + expense.get("Expense Name"));
+                    System.out.println("Category: " + expense.get("Category"));
+                    System.out.println("Value: " + expense.get("Value"));
+                    System.out.println("Date: " + expense.get("Date"));
+                    System.out.println();
+                }
+                break;
             }
-            break;
+
+            // Validate user input
+            if (choice >= 1 && choice <= (i+1)) {
+                //Add custom category to existing list of categories
+                String expenseCategory;
+                String expenseName;
+                if(choice == (i+1)) {
+                    System.out.print("Enter category name: ");
+                    scanner.nextLine();
+                    expenseCategory = scanner.nextLine();
+                    categories.add(expenseCategory);
+                    // Ask for expense name
+                    System.out.print("Enter expense name: "); 
+                    expenseName = scanner.nextLine();
+                }else {
+                    expenseCategory = categories.get(choice - 1);
+                    // Ask for expense name
+                    System.out.print("Enter expense name: "); 
+                    scanner.nextLine();
+                    expenseName = scanner.nextLine();
+                }
+
+                // Ask for expense value
+                System.out.print("Enter expense value (only the number): ");
+                String expenseValue = "$" + scanner.nextLine();
+
+                // Ask for date
+                System.out.print("Enter date (e.g., YYYY-MM-DD): ");
+                String date = scanner.nextLine();
+
+                // Create a dictionary to store expense details
+                Map<String, String> expenseDetails = new HashMap<>();
+                expenseDetails.put("Expense Name", expenseName);
+                expenseDetails.put("Category", expenseCategory);
+                expenseDetails.put("Value", expenseValue);
+                expenseDetails.put("Date", date);
+
+                // Add the expense details dictionary to the expenses list
+                expensesList.add(expenseDetails);
+
+                System.out.println("Expense added successfully.");
+
+            } else {
+                System.out.println("Invalid choice. Please enter a number between 1 and " + categories.size());
+            }
         }
-
-        // Validate user input
-        if (choice >= 1 && choice <= categories.length) {
-            String expenseCategory = categories[choice - 1];
-
-            // Ask for expense name
-            System.out.print("Enter expense name: "); 
-            scanner.nextLine();
-            String expenseName = scanner.nextLine();
-
-            // Ask for expense value
-            System.out.print("Enter expense value (only the number): ");
-            String expenseValue = "$" + scanner.nextLine();
-
-            // Ask for date
-            System.out.print("Enter date (e.g., YYYY-MM-DD): ");
-            String date = scanner.nextLine();
-
-            // Create a dictionary to store expense details
-            Map<String, String> expenseDetails = new HashMap<>();
-            expenseDetails.put("Expense Name", expenseName);
-            expenseDetails.put("Category", expenseCategory);
-            expenseDetails.put("Value", expenseValue);
-            expenseDetails.put("Date", date);
-
-            // Add the expense details dictionary to the expenses list
-            expensesList.add(expenseDetails);
-
-            System.out.println("Expense added successfully.");
-
-        } else {
-            System.out.println("Invalid choice. Please enter a number between 1 and " + categories.length);
-        }
-    }
     } 
 }
