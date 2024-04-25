@@ -2,9 +2,12 @@
 ## List of files in this repository
 * productBacklog.md : Product Backlog
 * Sprints.pdf : Sprint Timelines
-* systemDecomposition_MVC.jpg : New iteration for regrading. Used MVC architectural style. 
+* SystemDecomposition_MVC.jpg : New iteration for regrading. Used MVC architectural style.
+* XXX : Deployment Diagram
 * MoneyMinder.java: Java file that implements our system
 * MoneyMinderTest.java : File for JUnit testing of AddIncome
+</br>
+Note: MoneyMinder classes automatically added
 
 ## How to run the system
 1. Download MoneyMinder.java
