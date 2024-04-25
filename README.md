@@ -3,7 +3,7 @@
 * productBacklog.md : Product Backlog
 * Sprints.pdf : Sprint Timelines
 * SystemDecomposition_MVC.jpg : New iteration for regrading. Used MVC architectural style.
-* XXX : Deployment Diagram
+* DeploymentDiagram.jpg : Deployment Diagram
 * MoneyMinder.java: Java file that implements our system
 * MoneyMinderTest.java : File for JUnit testing of AddIncome
 </br>
