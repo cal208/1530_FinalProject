@@ -1,6 +1,8 @@
 # 1530 Final Project - Money Minder
 ## List of files in this repository
-productBacklog.md : Product Backlog : Sprints.pdf : New System Decomposition Attempt
+* productBacklog.md : Product Backlog
+* Sprints.pdf : Sprint Timelines
+* System Decomposition.jpg: New iteration for regrading
 
 MoneyMinder.java: Java file that implements our system
 ## How to run the system
